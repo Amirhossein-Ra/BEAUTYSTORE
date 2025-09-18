@@ -67,6 +67,6 @@ const ProductSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-
+ProductSchema.index({ "$**": "text" });
 const Product = mongoose.model("Product", ProductSchema);
 export default Product;
