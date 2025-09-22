@@ -73,8 +73,6 @@ const getProducts = asyncHandler(async (req, res) => {
     });
   } else {
     products = await Product.find().sort({ createdAt: -1 });
-  }
-  if (products) {
     res.status(200).json(products);
   }
 });
@@ -100,4 +98,11 @@ const ratingProduct = asyncHandler(async (req, res) => {
   }
 });
 
-export {ratingProduct,getProducts,getProduct,createProduct, updatedProduct,deleteProduct}
+export {
+  ratingProduct,
+  getProducts,
+  getProduct,
+  createProduct,
+  updatedProduct,
+  deleteProduct,
+};
