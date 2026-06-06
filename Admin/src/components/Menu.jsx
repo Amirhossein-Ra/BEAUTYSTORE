@@ -16,14 +16,17 @@ import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
-    <div className="h-[100vh] bg-gray-100 p-[20px] w-[350px] shadow-lg">
-      <ul className="flex flex-col items-start justify-start mt-[20px] pl-[20px]">
-        <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-colors duration-100 hover:bg-pink-300 hover:text-white">
-          <FaHome className="mr-[15px] text-[#ef93db]" />
+    <div className="h-screen bg-gray-100 p-5 w-87.5 shadow-lg">
+      <ul className="flex flex-col items-start justify-start mt-5 pl-5">
+        <Link to="/">
+        <li className="flex items-center text-[20px] cursor-pointer mt-5 transition-colors duration-100 hover:bg-pink-300 hover:text-white">
+          <FaHome className="mr-3.75 text-[#ef93db]" />
           Home
         </li>
-        <li className="flex items-center text-[20px] cursor-pointer mt-[20px] transition-colors duration-100">
-          <FaUser className="mr-[15px] text-[#ef93db]" />
+        </Link>
+        
+        <li className="flex items-center text-[20px] cursor-pointer mt-5 transition-colors duration-100">
+          <FaUser className="mr-3.75 text-[#ef93db]" />
           Profile
         </li>
 

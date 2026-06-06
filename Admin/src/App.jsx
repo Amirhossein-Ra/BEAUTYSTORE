@@ -1,18 +1,21 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import "./App.css";
 import Menu from "./components/Menu";
 import Home from "./pages/Home";
 import Users from "./pages/Users";
 import Products from "./pages/Products";
+import Orders from "./pages/Orders";
+import Banners from "./pages/Banners";
+import NewProduct from "./pages/NewProduct";
+import Product from "./pages/Product";
 
 function App() {
   const Layout = () => {
     return (
-      <div className="flex flex-col">
-        <div className="">
+      <div className="flex">
+        <div>
           <Menu />
         </div>
-        <div className="">
+        <div>
           <Outlet />
         </div>
       </div>
@@ -22,6 +25,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      // eslint-disable-next-line react-hooks/static-components
       element: <Layout />,
       children: [
         {
@@ -36,11 +40,28 @@ function App() {
           path: "/products",
           element: <Products />,
         },
+        {
+          path: "/orders",
+          element: <Orders />,
+        },
+        {
+          path: "/banners",
+          element: <Banners />,
+        },
+        {
+          path: "/new-product",
+          element: <NewProduct />,
+        },
+        {
+          path: "/product/:id",
+          element: <Product />,
+        },
       ],
     },
   ]);
+
   return (
-    <div className="">
+    <div>
       <RouterProvider router={router} />
     </div>
   );
