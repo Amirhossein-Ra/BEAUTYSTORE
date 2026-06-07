@@ -15,6 +15,8 @@ export default function NewProduct() {
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
+      console.log(e.target.files[0]);
+
       setSelectedImage(e.target.files[0]);
     }
   };
@@ -43,8 +45,6 @@ export default function NewProduct() {
         [e.target.name]: e.target.value,
       };
     });
-
-    console.log(inputs);
   };
 
   const handleUpload = async (e) => {
@@ -66,7 +66,7 @@ export default function NewProduct() {
       formData.append("signature", signature);
       formData.append("expire", expire);
       formData.append("token", token);
-      formData.append("folder", "/products"); 
+      formData.append("folder", "/products");
 
       // 3. POST directly to ImageKit upload endpoint
       const uploadRes = await axios.post(
@@ -83,11 +83,8 @@ export default function NewProduct() {
         },
       );
 
-
-      const imageUrl = uploadRes.data.url; 
+      const imageUrl = uploadRes.data.url;
       setUploading("Upload complete ✓");
-
-      console.log("Image URL:", uploadRes.data.url);
 
       await userRequest.post("/products", {
         img: imageUrl,

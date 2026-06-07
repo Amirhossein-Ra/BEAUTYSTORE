@@ -9,7 +9,7 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
 });
 
-router.get("/imagekit-auth", (req, res) => {
+router.get("/imagekit-auth", (_req, res) => {
   const authParams = imagekit.getAuthenticationParameters();
   // returns { token, expire, signature }
   res.json(authParams);
