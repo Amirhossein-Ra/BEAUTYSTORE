@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Products from "../components/Products";
+import { useLocation } from "react-router-dom";
 export default function ProductList() {
+  const location = useLocation();
+  const searchTerm = location.pathname.split("/")[2];
+
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+
+  const handleFilters = (e) => {
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+  };
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="flex justify-between m-4">
         {/* LEFT */}
         <div className="flex flex-col sm:flex-row sm:items-center">
           <span className="text-lg font-semibold mr-4">Filter Products</span>
-          <select name="concern" id="" className="p-2 mb-4 sm:mb-0 sm:mr-4">
+          <select
+            name="concern"
+            id=""
+            className="p-2 mb-4 sm:mb-0 sm:mr-4"
+            onChange={handleFilters}
+          >
             <option>Dry Skin</option>
             <option>Pigmentation</option>
             <option>Oil Control</option>
@@ -32,7 +51,12 @@ export default function ProductList() {
             <option>Hair Growth</option>
           </select>
 
-          <select name="brand" id="" className="p-2 mb-4 sm:mb-0 sm:mr-4">
+          <select
+            name="brand"
+            id=""
+            className="p-2 mb-4 sm:mb-0 sm:mr-4"
+            onChange={handleFilters}
+          >
             <option>Garnier</option>
             <option>Kylie</option>
             <option>Kiss Beauty</option>
@@ -50,7 +74,7 @@ export default function ProductList() {
         {/* RIGHT */}
         <div className="flex flex-col sm:flex-row sm:items-center">
           <span className="text-lg font-semibold mr-4">Sort Products</span>
-          <select name="price" id="">
+          <select name="price" id="" onChange={(e) => setSort(e.target.value)}>
             <option value="newest">Newest</option>
             <option value="asc">Price (asc)</option>
             <option value="desc">Price (desc)</option>
@@ -58,7 +82,7 @@ export default function ProductList() {
         </div>
       </div>
 
-      <Products />
+      <Products query={searchTerm} sort={sort} filters={filters} />
     </div>
   );
 }

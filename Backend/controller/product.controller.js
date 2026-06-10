@@ -61,16 +61,19 @@ const getProducts = asyncHandler(async (req, res) => {
   let products;
   if (qNew) {
     products = await Product.find().sort({ createdAt: -1 });
+    res.status(200).json(products);
   } else if (qCategory) {
     products = await Product.find({ categories: { $in: [qCategory] } });
+    res.status(200).json(products);
   } else if (qsearch) {
     products = await Product.find({
       $text: {
         $search: qsearch,
         $caseSensitive: false,
-        $dicriticSensitive: false,
+        $diacriticSensitive: false,
       },
     });
+    res.status(200).json(products);
   } else {
     products = await Product.find().sort({ createdAt: -1 });
     res.status(200).json(products);

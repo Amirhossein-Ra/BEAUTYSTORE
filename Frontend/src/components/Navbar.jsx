@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaSearch, FaUser } from "react-icons/fa";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 export default function Navbar() {
+  const [search, setSearch] = useState();
   const user = useSelector((state) => state.user);
-  console.log(user);
+
   return (
     <div className="flex items-center justify-between h-[100px] shadow-md px-6 ">
       <Link to="/">
@@ -19,8 +21,11 @@ export default function Navbar() {
           className="p-[15px] border-2 border-[#f096dd] border-solid w-[500px] outline-none rounded-lg mr-[-30px]"
           type="text"
           placeholder="search"
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <FaSearch className="text-[20px] cursor-pointer" />
+        <Link to={`/products/${search}`}>
+          <FaSearch className="text-[20px] cursor-pointer" />
+        </Link>
       </div>
 
       <div className="flex items-center">
@@ -32,15 +37,17 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {user ? (
-          <Link to="/myaccount">
-            <div className="flex items-center space-x-2 border border-pink-300 p-2 rounded-lg hover:bg-pink-100 cursor-pointer">
-              <FaUser className="text-[#e455c5] hover:text-pink-600 transition duration-300" />
-              <span className="text-[#e455c5] hover:text-pink-600 font-semibold">
-                {user.currentUser.name}
-              </span>
-            </div>
-          </Link>
+        {user.currentUser ? (
+          <div className="flex justify-center items-center">
+            <Link to="/myaccount">
+              <div className="flex items-center space-x-2 border border-pink-300 p-2 rounded-lg hover:bg-pink-100 cursor-pointer">
+                <FaUser className="text-[#e455c5] hover:text-pink-600 transition duration-300" />
+                <span className="text-[#e455c5] hover:text-pink-600 font-semibold">
+                  {user.currentUser.name}
+                </span>
+              </div>
+            </Link>
+          </div>
         ) : (
           <Link to="/login">
             <div className="flex items-center space-x-2 border border-pink-300 p-2 rounded-lg hover:bg-pink-100 cursor-pointer">
